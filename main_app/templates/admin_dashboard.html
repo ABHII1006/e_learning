@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Admin Dashboard</h1>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="buttons">
+            <a href="{{ url_for('main_routes.add_user') }}" class="btn">Add User</a>
+            <a href="{{ url_for('main_routes.remove_user') }}" class="btn">Remove User</a>
+            <a href="{{ url_for('main_routes.view_subjects') }}" class="btn">View Subjects</a>
+            <a href="{{ url_for('main_routes.add_subject') }}" class="btn">Add Subject</a>
+            <a href="{{ url_for('main_routes.add_admin') }}" class="btn">Add Admin</a>
+        </div>
+
+        <br>
+        <a href="{{ url_for('main_routes.index') }}">Back to Home</a>
+    </div>
+</body>
+</html>
