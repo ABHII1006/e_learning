@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Content</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/post_content.css') }}">
+    <script>
+        function toggleForm(formId) {
+            let forms = ["newCourseForm", "removeCourseForm", "updateCourseForm"];
+            forms.forEach(id => {
+                document.getElementById(id).style.display = (id === formId) ? "block" : "none";
+            });
+        }
+
+        function showRemoveTopics() {
+            let selectedCourse = document.getElementById("removeCourse").value;
+            let topicDropdown = document.getElementById("removeTopicDropdown");
+
+            if (selectedCourse) {
+                topicDropdown.style.display = "block";
+            } else {
+                topicDropdown.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Manage Courses</h1>
+
+    <button type="button" onclick="toggleForm('newCourseForm')">Add New Course</button>
+    <button type="button" onclick="toggleForm('removeCourseForm')">Remove Course</button>
+    <button type="button" onclick="toggleForm('updateCourseForm')">✎ Update Course</button>
+
+    <br><br>
+
+    <!-- New Course Form -->
+    <div id="newCourseForm" style="display: none;">
+        <h2>Create a New Course</h2>
+        <form action="{{ url_for('main_routes.add_course') }}" method="post">
+            <label for="new_course">New Course Name:</label>
+            <input type="text" id="new_course" name="new_course" required>
+            <button type="submit">Create Course</button>
+        </form>
+    </div>
+
+    <!-- Remove Course Form -->
+    <div id="removeCourseForm" style="display: none;">
+        <h2>Remove Course</h2>
+
+        <label for="removeCourse">Select Course:</label>
+        <select id="removeCourse" name="removeCourse" onchange="fetchTopics()">
+            <option value="">-- Select a Course --</option>
+            {% for course in courses %}
+            <option value="{{ course }}">{{ course }}</option>
+            {% endfor %}
+        </select>
+
+        <div id="removeTopicDropdown" style="display: none;">
+            <label for="removeTopic">Select Topic:</label>
+            <select id="removeTopic" name="removeTopic">
+                <option value="all_course">All (Delete Entire Course)</option>
+            </select>
+            <button type="button" onclick="deleteCourse()">Delete</button>
+        </div>
+    </div>
+
+    <script>
+    function fetchTopics() {
+        let selectedCourse = document.getElementById("removeCourse").value;
+        let topicDropdown = document.getElementById("removeTopicDropdown");
+        let topicSelect = document.getElementById("removeTopic");
+
+        if (selectedCourse) {
+            topicDropdown.style.display = "block";
+
+            fetch(`/get_topics?course=${selectedCourse}`)
+                .then(response => response.json())
+                .then(data => {
+                    topicSelect.innerHTML = ""; // Clear existing options
+
+                    // Add "All (Delete Entire Course)"
+                    let deleteCourseOption = document.createElement("option");
+                    deleteCourseOption.value = "all_course";
+                    deleteCourseOption.textContent = "All (Delete Entire Course)";
+                    topicSelect.appendChild(deleteCourseOption);
+
+<!--                    // Add "All Topics" option-->
+<!--                    let allTopicsOption = document.createElement("option");-->
+<!--                    allTopicsOption.value = "all_topics";-->
+<!--                    allTopicsOption.textContent = "All Topics";-->
+<!--                    topicSelect.appendChild(allTopicsOption);-->
+
+                    // Add individual topics
+                    data.topics.forEach(topic => {
+                        let option = document.createElement("option");
+                        option.value = topic;
+                        option.textContent = topic;
+                        topicSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error("Error fetching topics:", error));
+        } else {
+            topicDropdown.style.display = "none";
+        }
+    }
+
+    function deleteCourse() {
+        let course = document.getElementById("removeCourse").value;
+        let topic = document.getElementById("removeTopic").value;
+
+        if (!course) {
+            alert("Please select a course.");
+            return;
+        }
+
+        fetch('/remove_course', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ course: course, topic: topic })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            location.reload();
+        })
+        .catch(error => console.error("Error:", error));
+    }
+    </script>
+
+
+
+
+
+
+    <!-- Update Course Form -->
+    <!-- Update Course Form -->
+    <div id="updateCourseForm" style="display: none;">
+        <h2>Update Course Content</h2>
+
+        <form id="contentForm" action="{{ url_for('main_routes.post_content') }}" method="post">
+            <label for="updateCourse">Select Course:</label>
+            <select id="updateCourse" name="updateCourse" required>
+                <option value="">-- Select a Course --</option>
+                {% for course in courses %}
+                <option value="{{ course }}">{{ course }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+
+            <label for="topic">Topic:</label><br>
+            <input type="text" id="topic" name="topic" required><br>
+
+            <label for="category">Category:</label><br>
+            <select id="category" name="category" required>
+                <option value="question">Question</option>
+                <option value="tutorial">Tutorial</option>
+            </select><br>
+
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" required></textarea><br>
+
+            <input type="submit" value="Update Content">
+        </form>
+    </div>
+
+    <!-- JavaScript to Ensure Course Selection -->
+    <script>
+    document.getElementById("contentForm").addEventListener("submit", function(event) {
+        let courseSelect = document.getElementById("updateCourse");
+        if (!courseSelect.value) {
+            alert("❌ Please select a course before updating content.");
+            event.preventDefault(); // Stop form submission
+        }
+    });
+    </script>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <div id="flash-container">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <script>
+                // Automatically hide flash messages after 5 seconds
+                setTimeout(() => {
+                    let flashContainer = document.getElementById("flash-container");
+                    if (flashContainer) {
+                        flashContainer.style.transition = "opacity 0.5s ease-out";
+                        flashContainer.style.opacity = "0";
+                        setTimeout(() => flashContainer.remove(), 500);
+                    }
+                }, 5000); // 5000ms = 5 seconds
+            </script>
+        {% endif %}
+    {% endwith %}
+
+
+</body>
+</html>

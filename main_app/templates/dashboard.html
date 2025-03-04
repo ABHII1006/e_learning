@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dash_user.css') }}">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container1">
+            <!-- Logo -->
+            <div class="logo">
+                <span class="edu">Edu</span>
+                <svg width="42" height="54" viewBox="0 0 42 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M41.5385 29.3342C41.5385 36.1626 39.7332 41.3419 36.1228 44.8723L40.2543 51.84C40.366 52.1187 40.4218 52.3277 40.4218 52.4671V52.6761C40.4218 53.0477 40.3102 53.3497 40.0868 53.5819C39.8635 53.8606 39.603 54 39.3052 54H28.6414C27.9715 54 27.3945 53.791 26.9107 53.3729C26.4268 53.0013 26.0918 52.6297 25.9057 52.2581L24.4541 49.9587C23.3002 50.0981 22.072 50.1677 20.7692 50.1677C14.4789 50.1677 9.43548 48.4723 5.63896 45.0813C1.87965 41.6903 0 36.3948 0 29.1948V20.9729C0 13.7729 1.87965 8.47742 5.63896 5.08645C9.43548 1.69548 14.4789 0 20.7692 0C27.0596 0 32.0844 1.69548 35.8437 5.08645C39.6402 8.47742 41.5385 13.7265 41.5385 20.8335V29.3342ZM13.1538 28.5079C13.1538 30.4124 13.5335 35.1014 14.5385 36.1233C15.5806 37.1452 19.0198 42.3541 20.7692 42.3541C22.5186 42.3541 25.9057 37.1452 26.9107 36.1233C27.9528 35.0549 28.3846 30.4124 28.3846 28.5079L24.9007 24.9869L30.4615 20.8335C30.4615 18.929 32.4716 10.7063 31.4294 9.68437C30.4244 8.61598 22.5186 20.2002 20.7692 20.2002C19.0198 20.2002 10.4007 8.66243 9.35847 9.68437C8.35351 10.7063 10.3846 18.929 10.3846 20.8335L16.5819 24.9869L13.1538 28.5079Z" fill="black"/>
+                </svg>
+                <span class="quest">Quest</span>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#">Courses</a>
+                <a href="#">Careers</a>
+                <a href="#">About Us</a>
+            </nav>
+
+            <!-- User Profile -->
+            <div class="user-profile" onclick="toggleDropdown(event)">
+                <img src="assets/profile.jpg" alt="User" class="profile-img">
+                <div class="profile-dtl">
+                    <div class="profile-name">{{ user.name }}</div>
+                    <div class="profile-role">User</div>
+                </div>
+                <span class="dropdown-icon">▼</span>
+
+                <div class="dropdown-menu">
+                    <a href="#" style="color: black;">Profile</a>
+                    <a href="{{ url_for('main_routes.logout', user_type='user') }}" class="logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="frame">
+        <div class="frame-inner">
+            <div class="my-courses">MY COURSES</div>
+            <div class="welcome-section">
+                <div class="greeting">Welcome</div>
+                <div class="username" id="username">{{ user.name }}!</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-div">
+        <div class="container">
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <div class="search-text">Search your favourite course</div>
+                <button class="search-button">Search</button>
+            </div>
+
+            <!-- Courses Section -->
+            <div class="courses-section">
+                <h2 class="section-title">Your Courses</h2>
+                <div class="courses-container">
+                    {% for course in courses %}
+                        <div class="course-card">
+                            <h3 class="course-title">{{ course }}</h3>
+                            <a href="{{ url_for('main_routes.topics', course=course.strip() | urlencode) }}" class="view-course">View Topics</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <span class="logo-text">EduQuest</span>
+            </div>
+
+            <div class="newsletter">
+                <p>Subscribe to get our Newsletter</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Your Email">
+                    <button>Subscribe</button>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <a href="#">Careers</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+
+            <p class="copyright">2021 Class Technologies Inc.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown(event) {
+            event.stopPropagation();
+            let dropdown = document.querySelector(".dropdown-menu");
+            let icon = document.querySelector(".dropdown-icon");
+            let userProfile = event.currentTarget;
+
+            if (dropdown.classList.contains("show")) {
+                dropdown.classList.remove("show", "up", "down");
+                icon.innerHTML = "▼";
+            } else {
+                dropdown.classList.add("show");
+                let spaceBelow = window.innerHeight - userProfile.getBoundingClientRect().bottom;
+                dropdown.style.top = spaceBelow < 150 ? "-150px" : "50px";
+                icon.innerHTML = "▲";
+            }
+        }
+
+        document.addEventListener("click", function () {
+            let dropdown = document.querySelector(".dropdown-menu");
+            let icon = document.querySelector(".dropdown-icon");
+            if (dropdown) {
+                dropdown.classList.remove("show", "up", "down");
+                icon.innerHTML = "▼";
+            }
+        });
+    </script>
+</body>
+</html>

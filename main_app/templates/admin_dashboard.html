@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <title>EduQuest Sidebar</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/admin_dash.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+    <div class="main_div">
+        
+        <div class="sidebar">
+            <div class="content">
+                <div class="logo">
+                    <span class="edu">Edu</span>
+                    <svg width="40" height="50" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M30 21.2112C30 26.1428 28.6962 29.8835 26.0887 32.4331L29.0726 37.4654C29.1532 37.6667 29.1935 37.8176 29.1935 37.9183V38.0693C29.1935 38.3377 29.1129 38.5557 28.9516 38.7235C28.7903 38.9247 28.6021 39.0254 28.3871 39.0254H20.6855C20.2016 39.0254 19.7849 38.8744 19.4355 38.5725C19.086 38.3041 18.8441 38.0357 18.7097 37.7673L17.6613 36.1067C16.828 36.2073 15.9409 36.2576 15 36.2576C10.457 36.2576 6.81452 35.0331 4.07258 32.5841C1.35753 30.1351 0 26.3106 0 21.1106V15.1725C0 9.97249 1.35753 6.14797 4.07258 3.69894C6.81452 1.24991 10.457 0.0253906 15 0.0253906C19.543 0.0253906 23.172 1.24991 25.8871 3.69894C28.629 6.14797 30 9.93894 30 15.0718V21.2112ZM9.5 20.6144C9.5 21.9899 9.77419 25.3764 10.5 26.1144C11.2527 26.8525 13.7366 30.6144 15 30.6144C16.2634 30.6144 18.7097 26.8525 19.4355 26.1144C20.1882 25.3428 20.5 21.9899 20.5 20.6144L17.9839 18.0715L22 15.0718C22 13.6964 23.4517 7.75772 22.699 7.01965C21.9732 6.24804 16.2634 14.6144 15 14.6144C13.7366 14.6144 7.51158 6.28159 6.75889 7.01965C6.03309 7.75772 7.5 13.6964 7.5 15.0718L11.9758 18.0715L9.5 20.6144Z" fill="white"></path>
+                    </svg>
+                    <span class="uest">uest</span>
+                </div>
+
+                <nav class="nav-menu">
+                    <a href="#" class="menu-item active">Dashboard</a>
+                    <a href="#" class="menu-item">Courses</a>
+                    <a href="#" class="menu-item">Admin Profile</a>
+                </nav>
+
+                <div class="bottom-menu">
+                    <a href="#" class="menu-item">Settings</a>
+                    <a href="{{ url_for('main_routes.logout', user_type='admin') }}" class="menu-item logout">Logout</a>
+
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="search_welcome">
+            
+            <div class="frame-container">
+                <div class="frame-left">
+                    <div class="welcome-text">Hello {{ admin_name }}, Welcome back 👋🏻</div>
+                    <div class="dashboard-text">Your Dashboard today</div>
+                </div>
+                <div class="frame-right">
+                    <img class="profile-image" src="https://placehold.co/50x50" alt="Profile">
+                    <div class="profile-info">
+                        <div class="profile-name">{{ admin_name }}</div>
+                        <div class="profile-role">Admin</div>
+                    </div>
+                </div>
+            </div>
+            <div class="search-container">
+                <div class="search-box">
+                    <div class="search-content">
+                        <div class="search-icon">
+                            <svg width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.3777 21.875C18.0249 21.875 22.6029 17.4445 22.6029 11.9792C22.6029 6.51389 18.0249 2.08337 12.3777 2.08337C6.73055 2.08337 2.15259 6.51389 2.15259 11.9792C2.15259 17.4445 6.73055 21.875 12.3777 21.875Z" stroke="#4C4C4C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M23.6793 22.9167L21.5266 20.8334" stroke="#4C4C4C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <input type="text" class="search-input" placeholder="Search users, courses">
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-container">
+                <div class="second">
+                    <div class="top-header">
+                        <div class="section-title">Courses</div>
+                        <div class="add-user-btn">
+                            <div class="add-user-text"><a href="{{ url_for('main_routes.post_content', subject='your_subject_here') }}">Manage Course</a>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="courses-wrapper">
+                        {% for course in course_names %}
+                        <div class="course-box {{ course|lower }}">
+                            <div class="course-details">
+                                <div class="course-name">{{ course }}</div>
+                                <div class="student-count">
+                                    <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.34467 0.931152C7.57089 0.931152 6.90331 1.46151 6.49367 2.26463C7.17641 3.0829 7.58606 4.20424 7.58606 5.49226C7.58606 5.9317 7.54054 6.32568 7.44951 6.71967C7.73778 6.88635 8.02605 7.00758 8.34467 7.00758C9.60395 7.00758 10.6205 5.64379 10.6205 3.97694C10.6205 2.31009 9.60395 0.946306 8.34467 0.946306V0.931152ZM3.79303 2.44647C2.53374 2.44647 1.51721 3.81026 1.51721 5.47711C1.51721 7.14395 2.53374 8.50774 3.79303 8.50774C5.05232 8.50774 6.06885 7.14395 6.06885 5.47711C6.06885 3.81026 5.05232 2.44647 3.79303 2.44647ZM10.9998 7.23487C10.3474 8.00769 9.45223 8.47743 8.4357 8.50774C8.84535 9.08356 9.10327 9.78061 9.10327 10.5383V11.5384H12.1377V9.02295C12.1377 8.23498 11.6674 7.55309 10.9998 7.21972V7.23487ZM1.13791 8.75019C0.470336 9.08356 0 9.76545 0 10.5534V13.0688H7.58606V10.5534C7.58606 9.76545 7.11572 9.08356 6.44815 8.75019C5.76541 9.55331 4.83991 10.0231 3.79303 10.0231C2.74615 10.0231 1.82065 9.53816 1.13791 8.75019Z" fill="white"/>
+                                    </svg>
+                                    <span>0 students enrolled</span> <!-- Default value for student count -->
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                </div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash-messages">
+              {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+                <div class="table_struct">
+
+                    <div class="artist-container">
+                        <div class="artist-info">
+                            <div class="artist-title">All artists</div>
+                            <div class="artist-subtitle">Monitor artist sales, reviews, etc.</div>
+                        </div>
+                        <div class="main-btn">
+                            <div class="add-user-btn">
+                                <div class="add-user-text"><a href="{{ url_for('main_routes.add_user') }}">Add User</a></div>
+                            </div>
+
+                            <div class="add-user-btn">
+                                <div class="add-user-text"><a href="{{ url_for('main_routes.remove_user') }}">Remove User</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full border-collapse bg-white rounded-lg shadow-md">
+                            <thead class="bg-gray-900 text-white">
+                                <tr>
+                                    <th class="px-6 py-3 text-left">Id</th>
+                                    <th class="px-6 py-3 text-left">Username</th>
+                                    <th class="px-6 py-3 text-left">Email</th>
+                                    <th class="px-6 py-3 text-left">Phone</th>
+                                    <th class="px-6 py-3 text-left">Courses</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body" class="text-gray-700">
+                                {% for user in users %}
+                                    <tr class="border-b border-gray-300">
+                                        <td class="px-6 py-3">{{ user['id'] }}</td>
+                                        <td class="px-6 py-3">{{ user['username'] }}</td>
+                                        <td class="px-6 py-3">{{ user['email'] }}</td>
+                                        <td class="px-6 py-3">{{ user['phone'] }}</td>
+                                        <td class="px-6 py-3">{{ user['courses'] }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+
+                </div>
+            </div>
+
+            
+
+        </div>
+    </div>
+
+</body>
+</html>

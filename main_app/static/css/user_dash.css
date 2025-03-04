@@ -1,0 +1,191 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: white;
+}
+
+.main {
+  width: 1366px;
+  height: 1676px;
+  position: relative;
+  background: white;
+}
+
+/* Header Styles */
+.group-460 {
+  width: 1366px;
+  height: 97px;
+  position: relative;
+}
+
+.rectangle-1 {
+  width: 1366px;
+  height: 97px;
+  background: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.10);
+}
+
+.frame-12 {
+  width: 1197.70px;
+  height: 44.82px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.frame-13 {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.edu, .uest {
+  color: black;
+  font-size: 22.77px;
+  font-weight: 700;
+  letter-spacing: 0.91px;
+}
+
+.frame-11 {
+  display: flex;
+  align-items: center;
+  gap: 78px;
+}
+
+.frame-10 {
+  display: flex;
+  gap: 37px;
+}
+
+.frame-1, .frame-2, .frame-3, .frame-5 {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.home, .courses, .careers, .about-us {
+  font-size: 15.65px;
+  font-weight: 400;
+  letter-spacing: 0.31px;
+}
+
+.home {
+  color: black;
+}
+
+.courses, .careers, .about-us {
+  color: #525252;
+}
+
+.frame-9 {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.group-234 {
+  position: relative;
+}
+
+.rectangle-82 {
+  width: 44.82px;
+  height: 44.82px;
+  background: #D9D9D9;
+  border-radius: 42.69px;
+}
+
+.image-12 {
+  width: 44.82px;
+  height: 44.82px;
+  border-radius: 42.69px;
+}
+
+.frame-8 {
+  display: flex;
+  align-items: center;
+}
+
+.lina {
+  font-size: 12.81px;
+  font-weight: 500;
+  letter-spacing: 0.26px;
+}
+
+.icon-arrow {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 12.81px;
+}
+
+/* Footer Styles */
+.footer {
+  width: 1366px;
+  height: 397px;
+  position: relative;
+}
+
+.rectangle-80 {
+  width: 1366px;
+  height: 397px;
+  background: #071616;
+}
+
+.copyright, .subscribe-text, .careers, .privacy-policy, .terms-conditions {
+  text-align: center;
+  color: #B2B3CF;
+  font-size: 15.65px;
+  font-weight: 400;
+  letter-spacing: 0.63px;
+}
+
+.subscribe-text {
+  font-size: 18.50px;
+  font-weight: 500;
+  letter-spacing: 0.74px;
+}
+
+.group-115, .group-114, .frame-66, .frame-68, .frame-67 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.group-111 {
+  position: relative;
+}
+
+.polygon-2 svg {
+  width: 57px;
+  height: 57px;
+}
+
+.skilline {
+  color: white;
+  font-size: 22.77px;
+  font-weight: 700;
+  letter-spacing: 0.91px;
+}
+
+.line-10, .line-11, .line-12 {
+  width: 59.05px;
+  height: 0px;
+  border: 0.71px #626381 solid;
+  transform: rotate(90deg);
+}
+
+.virtual-class {
+  color: white;
+  font-size: 15.65px;
+  font-weight: 600;
+  letter-spacing: 0.63px;
+}
+
+.group-117 {
+  position: relative;
+}
+
+.rectangle-81 {
+  width: 284.58px;
+}

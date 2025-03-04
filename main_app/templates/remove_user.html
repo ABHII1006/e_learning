@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove User</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_user.css') }}">
+</head>
+<body>
+    <div class="register">
+        <div class="overlay-box1">
+            <div class="text-box">
+                <h1>Lorem Ipsum is simply</h1>
+                <p>Lorem Ipsum is simply</p>
+            </div>
+        </div>
+        <div class="form-container1">
+            <div class="form-header">
+                <h2>Remove User</h2>
+                <p>Are you sure you want to permanently delete user?<br>This action cannot be undone.</p>
+            </div>
+            <form action="" method="post">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your Email Address" required>
+                </div>
+                <div class="btn">
+                    <a href="{{ url_for('main_routes.admin_dashboard') }}" class="cancel-btn" style="
+                        display: inline-block;
+                        text-align: center;
+                        text-decoration: none;
+                        padding: 0px 32px;
+                        width: max-content;
+                        height: 49px;
+                        background: #efefef;
+                        color: #494D50;
+                        font-size: 18px;
+                        font-weight: 600;
+                        border-radius: 36px;
+                        border: none;
+                        cursor: pointer;
+                        line-height: 49px;">Cancel
+                    </a>
+
+                <button type="submit" class="add-btn" style="background: white;
+                    color: #CD3126;
+                    
+                    border: 2px solid #CD3126;">Remove</button>
+            
+                </div>
+            </form>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class="flashes">
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</body>
+</html>

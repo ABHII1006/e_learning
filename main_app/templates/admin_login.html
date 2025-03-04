@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login UI</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+  <header>
+    <div class="logo">
+        <span class="logo-text">Edu</span>
+        <svg width="40" height="50" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 21.2112C30 26.1428 28.6962 29.8835 26.0887 32.4331L29.0726 37.4654C29.1532 37.6667 29.1935 37.8176 29.1935 37.9183V38.0693C29.1935 38.3377 29.1129 38.5557 28.9516 38.7235C28.7903 38.9247 28.6021 39.0254 28.3871 39.0254H20.6855C20.2016 39.0254 19.7849 38.8744 19.4355 38.5725C19.086 38.3041 18.8441 38.0357 18.7097 37.7673L17.6613 36.1067C16.828 36.2073 15.9409 36.2576 15 36.2576C10.457 36.2576 6.81452 35.0331 4.07258 32.5841C1.35753 30.1351 0 26.3106 0 21.1106V15.1725C0 9.97249 1.35753 6.14797 4.07258 3.69894C6.81452 1.24991 10.457 0.0253906 15 0.0253906C19.543 0.0253906 23.172 1.24991 25.8871 3.69894C28.629 6.14797 30 9.93894 30 15.0718V21.2112ZM9.5 20.6144C9.5 21.9899 9.77419 25.3764 10.5 26.1144C11.2527 26.8525 13.7366 30.6144 15 30.6144C16.2634 30.6144 18.7097 26.8525 19.4355 26.1144C20.1882 25.3428 20.5 21.9899 20.5 20.6144L17.9839 18.0715L22 15.0718C22 13.6964 23.4517 7.75772 22.699 7.01965C21.9732 6.24804 16.2634 14.6144 15 14.6144C13.7366 14.6144 7.51158 6.28159 6.75889 7.01965C6.03309 7.75772 7.5 13.6964 7.5 15.0718L11.9758 18.0715L9.5 20.6144Z" fill="white"/>
+        </svg>
+        <span class="logo-text">uest</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('main_routes.index') }}">Home</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#careers">Careers</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="auth-buttons">
+        <a href="{{ url_for('main_routes.admin_login') }}">Admin Login</a>
+        <a href="{{ url_for('main_routes.login') }}">User Login</a>
+    </div>
+</header>
+    <div class="frame-247">
+        <div class="frame-235">
+            <div style="font-family: system-ui"  class="welcome-text">Admin Login</div>
+        </div>
+
+        <div class="frame-246">
+            <div class="frame-241">
+                <div class="lorem-text">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                </div>
+                <form action="" method="post" class="frame-240">
+                  <div class="group-225">
+                    <div class="input-label">Email</div>
+                    <div class="frame-236">
+                        <input type="text" id="identifier" name="identifier" placeholder="Enter your Email" required>
+                    </div>
+                </div>
+                
+                    <div class="frame-239">
+                        <div class="input-label">Password</div>
+                        <div class="frame-238">
+                            <div class="frame-237">
+                                <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+                                <!-- <div class="invisible-icon">👁</div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <input class="login_go" type="submit" value="Login"> -->
+                    <!-- <a href="{{ url_for('main_routes.admin_dashboard') }}" class="btn">Login</a> -->
+                    <input class="login_go" type="submit" value="Login">
+
+                </form>
+
+
+                <!-- Flash messages -->
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul class="flashes">
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>  
+    <footer>
+      <div class="footer-container">
+          <!-- Logo Section -->
+          <div class="footer-logo">
+              <span class="logo-text">Edu</span>
+              <svg width="30" height="40" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M30 21.2112C30 26.1428 28.6962 29.8835 26.0887 32.4331L29.0726 37.4654C29.1532 37.6667 29.1935 37.8176 29.1935 37.9183V38.0693C29.1935 38.3377 29.1129 38.5557 28.9516 38.7235C28.7903 38.9247 28.6021 39.0254 28.3871 39.0254H20.6855C20.2016 39.0254 19.7849 38.8744 19.4355 38.5725C19.086 38.3041 18.8441 38.0357 18.7097 37.7673L17.6613 36.1067C16.828 36.2073 15.9409 36.2576 15 36.2576C10.457 36.2576 6.81452 35.0331 4.07258 32.5841C1.35753 30.1351 0 26.3106 0 21.1106V15.1725C0 9.97249 1.35753 6.14797 4.07258 3.69894C6.81452 1.24991 10.457 0.0253906 15 0.0253906C19.543 0.0253906 23.172 1.24991 25.8871 3.69894C28.629 6.14797 30 9.93894 30 15.0718V21.2112ZM9.5 20.6144C9.5 21.9899 9.77419 25.3764 10.5 26.1144C11.2527 26.8525 13.7366 30.6144 15 30.6144C16.2634 30.6144 18.7097 26.8525 19.4355 26.1144C20.1882 25.3428 20.5 21.9899 20.5 20.6144L17.9839 18.0715L22 15.0718C22 13.6964 23.4517 7.75772 22.699 7.01965C21.9732 6.24804 16.2634 14.6144 15 14.6144C13.7366 14.6144 7.51158 6.28159 6.75889 7.01965C6.03309 7.75772 7.5 13.6964 7.5 15.0718L11.9758 18.0715L9.5 20.6144Z" fill="white"/>
+              </svg>
+              <span class="logo-text">uest</span>
+          </div>
+  
+          <!-- Newsletter Subscription -->
+          <div class="newsletter">
+              <p>Subscribe to get our Newsletter</p>
+              <div class="newsletter-form">
+                  <input type="email" placeholder="Your Email">
+                  <button>Subscribe</button>
+              </div>
+          </div>
+  
+          <!-- Footer Links -->
+          <div class="footer-links">
+              <a href="#">Careers</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms & Conditions</a>
+          </div>
+  
+          <!-- Copyright -->
+          <p class="copyright">2021 Class Technologies Inc.</p>
+      </div>
+  </footer>  
+</body>
+</html>

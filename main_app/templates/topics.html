@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course }} Topics</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        function showDescription(description) {
+            document.getElementById("description-box").innerText = description;
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>{{ course }} Topics</h1>
+        <a href="{{ url_for('main_routes.dashboard') }}">⬅ Back to Dashboard</a>
+    </header>
+
+    <div class="content-container">
+        <!-- Left Side: Topics List -->
+        <div class="topics-list">
+            <h2>Topics</h2>
+            <ul>
+                {% for topic in topics %}
+                    <li>
+                        <button onclick="showDescription(`{{ topic[2] }}`)">{{ topic[1] }}</button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Right Side: Topic Description -->
+        <div class="description-box" id="description-box">
+            <h2>Topic Description</h2>
+            <p>Click on a topic to see the description.</p>
+        </div>
+    </div>
+
+</body>
+</html>
